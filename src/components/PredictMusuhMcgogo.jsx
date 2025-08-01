@@ -86,7 +86,7 @@ const Header = () => (
     </h1>
     <div className="font-mono text-green-400 text-sm md:text-lg lg:text-xl font-bold animate-slide-in-top" style={{ animationDelay: '0.3s' }}>
       <i className="fas fa-terminal mr-1 md:mr-2"></i>
-      [ SYSTEM DEVELOPED BY RUII DEWA MC ]
+      [ DEVELOPED BY RUII DEWA MC ]
     </div>
   </div>
 );
