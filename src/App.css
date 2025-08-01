@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #00ffff, #8a2be2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #8a2be2, #ff1493);
+}
+
+/* Custom animations yang tidak bisa dibuat dengan Tailwind */
+@keyframes glitch-1 {
+  0%, 14%, 15%, 49%, 50%, 99%, 100% {
+    transform: translate(0);
+  }
+  15%, 49% {
+    transform: translate(-2px, 2px);
+  }
+}
+
+@keyframes glitch-2 {
+  0%, 20%, 21%, 62%, 63%, 99%, 100% {
+    transform: translate(0);
+  }
+  21%, 62% {
+    transform: translate(2px, -2px);
+  }
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch-1 2s infinite;
+  color: #ff1493;
+  z-index: -1;
+}
+
+.glitch::after {
+  animation: glitch-2 2s infinite;
+  color: #00ffff;
+  z-index: -2;
+}
+
+/* Cyber notification animation */
+@keyframes cyber-pulse {
+  0% { 
+    transform: scale(0.8) translateX(100%); 
+    opacity: 0; 
+  }
+  50% { 
+    transform: scale(1.1) translateX(0); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(1) translateX(0); 
+    opacity: 1; 
+  }
+}
+
+.animate-cyber-pulse {
+  animation: cyber-pulse 0.5s ease;
+}
+
+/* Background moving gradient */
+@keyframes bgMove {
+  0% { 
+    transform: translateX(-50px) translateY(-30px) rotate(0deg); 
+  }
+  100% { 
+    transform: translateX(50px) translateY(30px) rotate(2deg); 
+  }
+}
+
+.animate-bg-move {
+  animation: bgMove 20s ease-in-out infinite alternate;
+}
+
+/* Rainbow mode untuk easter egg */
+@keyframes rainbow-mode {
+  0% { filter: hue-rotate(0deg) saturate(1); }
+  25% { filter: hue-rotate(90deg) saturate(1.5); }
+  50% { filter: hue-rotate(180deg) saturate(2); }
+  75% { filter: hue-rotate(270deg) saturate(1.5); }
+  100% { filter: hue-rotate(360deg) saturate(1); }
+}
+
+.animate-rainbow-mode {
+  animation: rainbow-mode 2s ease infinite;
+}
