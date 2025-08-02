@@ -385,7 +385,6 @@ const PredictMusuhMcgogo = () => {
                     </h6>
                     <ul className="text-sm space-y-1">
                       <li>• Validitas: Round 1-7 saja</li>
-                      <li>• Pattern Loop: Round 11 = Round 7</li>
                       <li>• Input Manual: Round 2, 4, 5(P8Vs), 6(P8Vs)</li>
                       <li>• Field hijau = Auto-Generated</li>
                     </ul>
@@ -493,8 +492,8 @@ const PredictMusuhMcgogo = () => {
           <CyberAlert type="success" title="DETEKSI POLA SISTEM:" delay={1.2}>
             <p>
               <i className="fas fa-chart-line mr-2"></i>
-              Algoritma mendeteksi <strong>ROUND 11 = ROUND 7</strong>. 
-              Pattern loop teridentifikasi dalam sistem prediksi musuh.
+              Algoritma mendeteksi <strong>BAHWA</strong>. 
+              Ruii adalah dewa yang mengendalikan sistem ini.
             </p>
           </CyberAlert>
 
