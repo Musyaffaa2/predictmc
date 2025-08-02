@@ -1,60 +1,223 @@
 import React, { useState, useEffect } from 'react';
 
-// Komponen untuk efek partikel yang lebih halus
-const FloatingParticles = () => {
-  const particles = Array.from({ length: 12 }, (_, i) => (
+// Komponen untuk efek background yang lebih kompleks dan menarik
+const EnhancedBackground = () => {
+  const particles = Array.from({ length: 20 }, (_, i) => (
     <div
       key={i}
-      className="fixed w-1 h-1 bg-cyan-400 rounded-full pointer-events-none z-0 opacity-60"
+      className="fixed rounded-full pointer-events-none z-0"
       style={{
         left: `${Math.random() * 100}%`,
         top: `${Math.random() * 100}%`,
-        animation: `float ${Math.random() * 8 + 12}s ease-in-out infinite`,
+        width: `${Math.random() * 4 + 2}px`,
+        height: `${Math.random() * 4 + 2}px`,
+        background: `rgba(${Math.random() > 0.5 ? '6, 182, 212' : Math.random() > 0.5 ? '168, 85, 247' : '236, 72, 153'}, ${Math.random() * 0.8 + 0.2})`,
+        animation: `float ${Math.random() * 12 + 15}s ease-in-out infinite`,
         animationDelay: `${Math.random() * 10}s`,
       }}
     />
+  ));
+
+  // Floating geometric shapes
+  const geometricShapes = Array.from({ length: 8 }, (_, i) => (
+    <div
+      key={`geo-${i}`}
+      className="fixed pointer-events-none z-0 opacity-10"
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        width: `${Math.random() * 100 + 50}px`,
+        height: `${Math.random() * 100 + 50}px`,
+        border: `2px solid rgba(${Math.random() > 0.5 ? '6, 182, 212' : '168, 85, 247'}, 0.3)`,
+        borderRadius: Math.random() > 0.5 ? '50%' : '0%',
+        animation: `geometricFloat ${Math.random() * 20 + 25}s linear infinite`,
+        animationDelay: `${Math.random() * 15}s`,
+        transform: `rotate(${Math.random() * 360}deg)`,
+      }}
+    />
+  ));
+
+  // Digital rain effect
+  const digitalRain = Array.from({ length: 15 }, (_, i) => (
+    <div
+      key={`rain-${i}`}
+      className="fixed pointer-events-none z-0 font-mono text-green-400 opacity-20 text-xs"
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: '-50px',
+        animation: `digitalRain ${Math.random() * 8 + 12}s linear infinite`,
+        animationDelay: `${Math.random() * 10}s`,
+      }}
+    >
+      {Array.from({ length: Math.floor(Math.random() * 10 + 5) }, (_, j) => (
+        <div key={j} style={{ marginBottom: '10px' }}>
+          {Math.random().toString(36).substring(2, 4)}
+        </div>
+      ))}
+    </div>
   ));
 
   return (
     <>
       <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
-          25% { transform: translateY(-20px) translateX(10px); opacity: 0.8; }
-          50% { transform: translateY(-10px) translateX(-15px); opacity: 0.6; }
-          75% { transform: translateY(-25px) translateX(5px); opacity: 0.9; }
+          0%, 100% { 
+            transform: translateY(0px) translateX(0px) rotate(0deg); 
+            opacity: 0.3; 
+          }
+          25% { 
+            transform: translateY(-30px) translateX(15px) rotate(90deg); 
+            opacity: 0.8; 
+          }
+          50% { 
+            transform: translateY(-15px) translateX(-20px) rotate(180deg); 
+            opacity: 0.6; 
+          }
+          75% { 
+            transform: translateY(-35px) translateX(10px) rotate(270deg); 
+            opacity: 0.9; 
+          }
         }
+
+        @keyframes geometricFloat {
+          0% { 
+            transform: translateY(100vh) translateX(0px) rotate(0deg) scale(0.5); 
+            opacity: 0; 
+          }
+          10% { 
+            opacity: 0.1; 
+          }
+          90% { 
+            opacity: 0.1; 
+          }
+          100% { 
+            transform: translateY(-100px) translateX(100px) rotate(360deg) scale(1.2); 
+            opacity: 0; 
+          }
+        }
+
+        @keyframes digitalRain {
+          0% { 
+            transform: translateY(-50px); 
+            opacity: 0; 
+          }
+          10% { 
+            opacity: 0.3; 
+          }
+          90% { 
+            opacity: 0.3; 
+          }
+          100% { 
+            transform: translateY(100vh); 
+            opacity: 0; 
+          }
+        }
+
         @keyframes slideInFromTop {
           from { transform: translateY(-100px); opacity: 0; }
           to { transform: translateY(0px); opacity: 1; }
         }
+
         @keyframes slideInFromRight {
           from { transform: translateX(100px); opacity: 0; }
           to { transform: translateX(0px); opacity: 1; }
         }
+
         @keyframes fadeInUp {
           from { transform: translateY(30px); opacity: 0; }
           to { transform: translateY(0px); opacity: 1; }
         }
+
         @keyframes glow {
           0%, 100% { box-shadow: 0 0 5px rgba(6, 182, 212, 0.5); }
           50% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.8); }
         }
+
         @keyframes shimmer {
           0% { background-position: -200px 0; }
           100% { background-position: 200px 0; }
         }
+
+        @keyframes matrixScan {
+          0% { transform: translateY(-100vh); opacity: 0; }
+          50% { opacity: 0.8; }
+          100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        @keyframes pulseGlow {
+          0%, 100% { 
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.3), 
+                        0 0 20px rgba(168, 85, 247, 0.2),
+                        0 0 30px rgba(236, 72, 153, 0.1); 
+          }
+          50% { 
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 
+                        0 0 40px rgba(168, 85, 247, 0.4),
+                        0 0 60px rgba(236, 72, 153, 0.3); 
+          }
+        }
+
         .animate-slide-in-top { animation: slideInFromTop 0.8s ease-out; }
         .animate-slide-in-right { animation: slideInFromRight 0.6s ease-out; }
         .animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
         .animate-glow { animation: glow 3s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulseGlow 4s ease-in-out infinite; }
         .animate-shimmer {
           background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
           background-size: 200px 100%;
           animation: shimmer 2s infinite;
         }
+
+        /* Gradient overlay animations */
+        .bg-animated-gradient {
+          background: linear-gradient(45deg, #0f0f23, #1a0a2e, #16213e, #0f0f23);
+          background-size: 400% 400%;
+          animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        /* Cyber grid effect */
+        .cyber-grid {
+          background-image: 
+            linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+          background-size: 50px 50px;
+          animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(50px, 50px); }
+        }
       `}</style>
+
+      {/* Matrix scanning line */}
+      <div 
+        className="fixed left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent pointer-events-none z-10 opacity-70"
+        style={{ animation: 'matrixScan 8s ease-in-out infinite' }}
+      />
+
+      {/* Animated particles */}
       {particles}
+      
+      {/* Geometric shapes */}
+      {geometricShapes}
+      
+      {/* Digital rain */}
+      {digitalRain}
+
+      {/* Cyber grid overlay */}
+      <div className="fixed inset-0 cyber-grid pointer-events-none z-0" />
+
+      {/* Additional glow orbs */}
+      <div className="fixed top-1/4 left-1/4 w-32 h-32 bg-cyan-400/5 rounded-full blur-3xl animate-pulse-glow pointer-events-none z-0" />
+      <div className="fixed bottom-1/4 right-1/4 w-40 h-40 bg-purple-500/5 rounded-full blur-3xl animate-pulse-glow pointer-events-none z-0" style={{ animationDelay: '2s' }} />
+      <div className="fixed top-1/2 right-1/3 w-24 h-24 bg-pink-500/5 rounded-full blur-3xl animate-pulse-glow pointer-events-none z-0" style={{ animationDelay: '4s' }} />
     </>
   );
 };
@@ -72,7 +235,7 @@ const HudElements = () => (
       MODE: PREDICT
     </div>
     <div className="fixed bottom-5 right-5 font-mono text-cyan-400 text-sm opacity-70 hidden md:block animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-      VER: 2.0
+      VER: 3.0
     </div>
   </>
 );
@@ -92,16 +255,19 @@ const Header = () => (
 );
 
 // Komponen Button Cyber dengan animasi hover yang lebih smooth
-const CyberButton = ({ onClick, children, variant = "cyan", className = "" }) => {
+const CyberButton = ({ onClick, children, variant = "cyan", className = "", disabled = false }) => {
   const variants = {
     cyan: "border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black shadow-cyan-400/30",
-    pink: "border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-black shadow-pink-500/30"
+    pink: "border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-black shadow-pink-500/30",
+    purple: "border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-black shadow-purple-500/30",
+    green: "border-green-400 text-green-400 hover:bg-green-400 hover:text-black shadow-green-400/30"
   };
 
   return (
     <button
       onClick={onClick}
-      className={`font-mono border-2 px-4 py-2 md:px-6 md:py-3 font-bold uppercase tracking-wider relative overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:scale-105 backdrop-blur-sm text-sm md:text-base w-full md:w-auto transform active:scale-95 ${variants[variant]} shadow-lg hover:shadow-xl ${className}`}
+      disabled={disabled}
+      className={`font-mono border-2 px-4 py-2 md:px-6 md:py-3 font-bold uppercase tracking-wider relative overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:scale-105 backdrop-blur-sm text-sm md:text-base w-full md:w-auto transform active:scale-95 ${variants[variant]} shadow-lg hover:shadow-xl ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-700"></div>
       <span className="relative z-10">{children}</span>
@@ -133,7 +299,8 @@ const CyberAlert = ({ type = "info", title, children, className = "", delay = 0 
   const types = {
     info: "border-cyan-400 shadow-cyan-400/20",
     success: "border-green-400 shadow-green-400/20",
-    warning: "border-orange-400 shadow-orange-400/20"
+    warning: "border-orange-400 shadow-orange-400/20",
+    danger: "border-red-400 shadow-red-400/20"
   };
 
   return (
@@ -188,6 +355,9 @@ const PredictMusuhMcgogo = () => {
   const [showInstructions, setShowInstructions] = useState(false);
   const [notification, setNotification] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [selectedScenario, setSelectedScenario] = useState('');
+  const [round8Opponent, setRound8Opponent] = useState('');
   const [rounds, setRounds] = useState([
     { round: 1, userVs: '', p8Vs: '' },
     { round: 2, userVs: '', p8Vs: '' },
@@ -197,6 +367,76 @@ const PredictMusuhMcgogo = () => {
     { round: 6, userVs: '', p8Vs: '' },
     { round: 7, userVs: '', p8Vs: '' }
   ]);
+
+  // Data skenario advanced untuk Round 8+
+  const advancedScenarios = {
+    'round1': {
+      name: 'Lawan Round 1',
+      rounds: [
+        { round: 8, pattern: 'r1' },
+        { round: 9, pattern: 'r2' },
+        { round: 10, pattern: 'r3' },
+        { round: 11, pattern: 'r4' },
+        { round: 12, pattern: 'r5' },
+        { round: 13, pattern: 'r6' }
+      ]
+    },
+    'round2': {
+      name: 'Lawan Round 2',
+      rounds: [
+        { round: 8, pattern: 'r2' },
+        { round: 9, pattern: 'r4' },
+        { round: 10, pattern: 'r3' },
+        { round: 11, pattern: 'r7' },
+        { round: 12, pattern: 'r5' },
+        { round: 13, pattern: 'r1' }
+      ]
+    },
+    'round5_s1': {
+      name: 'Lawan Round 5 (Skenario 1)',
+      rounds: [
+        { round: 8, pattern: 'r5' },
+        { round: 9, pattern: 'r4' },
+        { round: 10, pattern: 'r3' },
+        { round: 11, pattern: null }, // Unknown
+        { round: 12, pattern: null }  // Unknown
+      ]
+    },
+    'round5_s2': {
+      name: 'Lawan Round 5 (Skenario 2)',
+      rounds: [
+        { round: 8, pattern: 'r5' },
+        { round: 9, pattern: 'r2' },
+        { round: 10, pattern: 'r3' },
+        { round: 11, pattern: 'r7' },
+        { round: 12, pattern: null },
+        { round: 13, pattern: null }
+      ]
+    },
+    'round6_s1': {
+      name: 'Lawan Round 6 (Skenario 1)',
+      rounds: [
+        { round: 8, pattern: 'r6' },
+        { round: 9, pattern: 'r2' },
+        { round: 10, pattern: 'r5' },
+        { round: 11, pattern: 'r4' },
+        { round: 12, pattern: 'r7' },
+        { round: 13, pattern: 'r1' }
+      ]
+    },
+    'round6_s2': {
+      name: 'Lawan Round 6 (Skenario 2 - Mati 1)',
+      rounds: [
+        { round: 8, pattern: 'r6' },
+        { round: 9, pattern: 'r2' },
+        { round: 10, pattern: 'r5' },
+        { round: 11, pattern: 'r4' },
+        { round: 12, pattern: 'r5' }, // Mati 1 effect
+        { round: 13, pattern: 'r1' },
+        { round: 14, pattern: 'r3' }
+      ]
+    }
+  };
 
   // Load animasi saat komponen mount
   useEffect(() => {
@@ -209,8 +449,8 @@ const PredictMusuhMcgogo = () => {
     setNotification({ message, type });
   };
 
-  // Fungsi untuk menghitung prediksi
-  const computePredictions = () => {
+  // Fungsi untuk menghitung prediksi dasar (Round 1-7)
+  const computeBasicPredictions = () => {
     const newRounds = [...rounds];
 
     // Round 1: automatic
@@ -242,9 +482,45 @@ const PredictMusuhMcgogo = () => {
     return newRounds;
   };
 
+  // Fungsi untuk mendapatkan opponent dari pattern
+  const getOpponentFromPattern = (pattern, basicRounds) => {
+    if (!pattern) return '';
+    
+    const roundIndex = parseInt(pattern.replace('r', '')) - 1;
+    if (roundIndex >= 0 && roundIndex < basicRounds.length) {
+      // Ambil dari kolom userVs jika ada, kalau tidak dari p8Vs
+      return basicRounds[roundIndex].userVs || basicRounds[roundIndex].p8Vs || '';
+    }
+    return '';
+  };
+
+  // Fungsi untuk menghitung prediksi advanced (Round 8+)
+  const computeAdvancedPredictions = (basicRounds) => {
+    if (!selectedScenario || !advancedScenarios[selectedScenario]) {
+      return [];
+    }
+
+    const scenario = advancedScenarios[selectedScenario];
+    const advancedRounds = [];
+
+    scenario.rounds.forEach(roundData => {
+      const opponent = roundData.pattern ? getOpponentFromPattern(roundData.pattern, basicRounds) : '';
+      advancedRounds.push({
+        round: roundData.round,
+        userVs: opponent,
+        p8Vs: '', // P8 column tetap kosong untuk advanced rounds
+        isAdvanced: true,
+        pattern: roundData.pattern
+      });
+    });
+
+    return advancedRounds;
+  };
+
   // Update rounds setiap kali ada perubahan
   useEffect(() => {
-    setRounds(computePredictions());
+    const basicRounds = computeBasicPredictions();
+    setRounds(basicRounds);
   }, [userName, p8Name]);
 
   // Fungsi untuk mengecek apakah field auto-generated
@@ -254,6 +530,7 @@ const PredictMusuhMcgogo = () => {
     if (round === 5 && field === 'userVs') return true;
     if (round === 6 && field === 'userVs') return true;
     if (round === 7) return true;
+    if (round >= 8) return true; // Advanced rounds are auto-generated
     return false;
   };
 
@@ -288,7 +565,8 @@ const PredictMusuhMcgogo = () => {
     
     // Recompute predictions
     setTimeout(() => {
-      setRounds(computePredictions());
+      const basicRounds = computeBasicPredictions();
+      setRounds(basicRounds);
     }, 50);
     
     showNotification(`ROUND ${index + 1} UPDATED`, 'info');
@@ -300,6 +578,9 @@ const PredictMusuhMcgogo = () => {
       setUserName('');
       setP8Name('');
       setShowInstructions(false);
+      setShowAdvanced(false);
+      setSelectedScenario('');
+      setRound8Opponent('');
       setRounds([
         { round: 1, userVs: '', p8Vs: '' },
         { round: 2, userVs: '', p8Vs: '' },
@@ -313,15 +594,47 @@ const PredictMusuhMcgogo = () => {
     }
   };
 
+  // Handle aktivasi mode advanced
+  const handleAdvancedMode = () => {
+    if (!showAdvanced && (!userName.trim() || !p8Name.trim())) {
+      showNotification('LENGKAPI DATA DASAR TERLEBIH DAHULU', 'warning');
+      return;
+    }
+    setShowAdvanced(!showAdvanced);
+    if (!showAdvanced) {
+      showNotification('MODE ADVANCED DIAKTIFKAN', 'success');
+    }
+  };
+
+  // Handle perubahan skenario
+  const handleScenarioChange = (scenario) => {
+    setSelectedScenario(scenario);
+    showNotification(`SKENARIO ${advancedScenarios[scenario].name.toUpperCase()} DIPILIH`, 'info');
+  };
+
+  // Gabungkan rounds dasar dengan advanced
+  const allRounds = showAdvanced && selectedScenario ? 
+    [...rounds, ...computeAdvancedPredictions(rounds)] : rounds;
+
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-cyan-900/20 animate-pulse" style={{ animationDuration: '4s' }}></div>
-      <FloatingParticles />
+    <div className="min-h-screen bg-animated-gradient relative overflow-hidden">
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-cyan-900/20 to-pink-900/25 animate-pulse" style={{ animationDuration: '6s' }}></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-cyan-400/5 to-transparent animate-pulse" style={{ animationDuration: '8s', animationDelay: '2s' }}></div>
+      <div className="absolute inset-0 bg-gradient-to-bl from-purple-500/10 via-transparent to-pink-500/10 animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }}></div>
       
-      {/* Scan Line Effect yang lebih halus */}
+      {/* Enhanced Background with all effects */}
+      <EnhancedBackground />
+      
+      {/* Multiple scan lines for matrix effect */}
       <div className="fixed top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent pointer-events-none z-10" 
            style={{ animation: 'shimmer 3s ease-in-out infinite' }}></div>
+      <div className="fixed bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-purple-500 to-transparent pointer-events-none z-10" 
+           style={{ animation: 'shimmer 4s ease-in-out infinite', animationDelay: '1s' }}></div>
+      
+      {/* Vertical scan lines */}
+      <div className="fixed top-0 left-0 w-0.5 h-full bg-gradient-to-b from-transparent via-pink-500 to-transparent pointer-events-none z-10 opacity-30" 
+           style={{ animation: 'shimmer 5s ease-in-out infinite', animationDelay: '2s', transform: 'rotate(90deg)', transformOrigin: 'top left' }}></div>
       
       {/* HUD Elements */}
       <HudElements />
@@ -344,13 +657,20 @@ const PredictMusuhMcgogo = () => {
           <Header />
 
           {/* Action Buttons */}
-          <div className="flex justify-center items-center mb-6 md:mb-8 gap-2 md:gap-4 flex-col md:flex-row animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+          <div className="flex justify-center items-center mb-6 md:mb-8 gap-2 md:gap-4 flex-wrap animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
             <CyberButton
               onClick={() => setShowInstructions(!showInstructions)}
               variant="cyan"
             >
               <i className="fas fa-info-circle mr-1 md:mr-2"></i>
               {showInstructions ? 'TUTUP MANUAL' : 'MANUAL SISTEM'}
+            </CyberButton>
+            <CyberButton
+              onClick={handleAdvancedMode}
+              variant="purple"
+            >
+              <i className="fas fa-rocket mr-1 md:mr-2"></i>
+              {showAdvanced ? 'MODE BASIC' : 'MODE ADVANCED'}
             </CyberButton>
             <CyberButton
               onClick={handleReset}
@@ -369,7 +689,7 @@ const PredictMusuhMcgogo = () => {
                   <div className="transform transition-all duration-300 hover:translate-x-2">
                     <p className="mb-4"><strong>TARGET P8</strong> adalah musuh utama/mantan pertama yang akan diprediksi sistemnya.</p>
                     <h6 className="font-mono font-bold mb-2">
-                      <i className="fas fa-cogs mr-2"></i>PROTOKOL OTOMATIS:
+                      <i className="fas fa-cogs mr-2"></i>PROTOKOL OTOMATIS BASIC:
                     </h6>
                     <ul className="text-sm space-y-1">
                       <li>• ROUND 1: User vs P8 → P8 vs User</li>
@@ -381,12 +701,21 @@ const PredictMusuhMcgogo = () => {
                   </div>
                   <div className="transform transition-all duration-300 hover:translate-x-2">
                     <h6 className="font-mono font-bold mb-2">
-                      <i className="fas fa-exclamation-triangle mr-2"></i>PERINGATAN SISTEM:
+                      <i className="fas fa-rocket mr-2"></i>MODE ADVANCED (ROUND 8+):
                     </h6>
                     <ul className="text-sm space-y-1">
-                      <li>• Validitas: Round 1-7 saja</li>
+                      <li>• Prediksi berdasarkan lawan Round 8</li>
+                      <li>• 6 Skenario berbeda tersedia</li>
+                      <li>• Algoritma pattern matching</li>
+                      <li>• Support untuk kondisi "Mati 1"</li>
+                    </ul>
+                    <h6 className="font-mono font-bold mb-2 mt-4">
+                      <i className="fas fa-exclamation-triangle mr-2"></i>PERINGATAN:
+                    </h6>
+                    <ul className="text-sm space-y-1">
                       <li>• Input Manual: Round 2, 4, 5(P8Vs), 6(P8Vs)</li>
                       <li>• Field hijau = Auto-Generated</li>
+                      <li>• Advanced membutuhkan data basic lengkap</li>
                     </ul>
                   </div>
                 </div>
@@ -432,6 +761,38 @@ const PredictMusuhMcgogo = () => {
             </div>
           </div>
 
+          {/* Advanced Mode Controls */}
+          {showAdvanced && (
+            <div className="mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+              <CyberAlert type="success" title="MODE ADVANCED AKTIF - PILIH SKENARIO:" delay={0.1}>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {Object.entries(advancedScenarios).map(([key, scenario]) => (
+                    <CyberButton
+                      key={key}
+                      onClick={() => handleScenarioChange(key)}
+                      variant={selectedScenario === key ? "green" : "cyan"}
+                      className={`text-xs ${selectedScenario === key ? 'animate-glow' : ''}`}
+                    >
+                      <i className="fas fa-chart-line mr-1"></i>
+                      {scenario.name}
+                    </CyberButton>
+                  ))}
+                </div>
+                {selectedScenario && (
+                  <div className="mt-4 p-4 bg-black/30 rounded-lg border border-green-400/30">
+                    <p className="text-green-400 font-mono">
+                      <i className="fas fa-info-circle mr-2"></i>
+                      SKENARIO AKTIF: <strong>{advancedScenarios[selectedScenario].name}</strong>
+                    </p>
+                    <p className="text-sm text-gray-300 mt-2">
+                      Prediksi Round 8+ akan dihitung berdasarkan pola skenario yang dipilih.
+                    </p>
+                  </div>
+                )}
+              </CyberAlert>
+            </div>
+          )}
+
           {/* Rounds Table dengan animasi staggered */}
           <div className="overflow-x-auto animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
             <table className="w-full border-2 border-cyan-400 shadow-lg shadow-cyan-400/20 transform transition-all duration-500 hover:shadow-cyan-400/30">
@@ -448,62 +809,152 @@ const PredictMusuhMcgogo = () => {
                     <i className="fas fa-robot mr-1 hidden md:inline"></i>
                     {p8Name.trim() ? p8Name : 'p8'} vs
                   </th>
+                  {showAdvanced && (
+                    <th className="border-b-2 border-cyan-400 p-2 md:p-4 text-white font-mono font-bold text-center text-sm md:text-base transition-all duration-300 hover:bg-cyan-400/20">
+                      <i className="fas fa-cogs mr-1 hidden md:inline"></i>
+                      PATTERN
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody>
-                {rounds.map((round, index) => (
+                {allRounds.map((round, index) => (
                   <tr 
-                    key={round.round} 
-                    className="hover:bg-cyan-400/5 transition-all duration-500 transform hover:scale-102"
+                    key={`${round.round}-${round.isAdvanced || 'basic'}`}
+                    className={`hover:bg-cyan-400/5 transition-all duration-500 transform hover:scale-102 ${
+                      round.isAdvanced ? 'bg-purple-500/10 border-l-4 border-purple-500' : ''
+                    }`}
                     style={{ 
-                      animation: `fadeInUp 0.6s ease-out ${0.1 * index + 1}s both`
+                      animation: `fadeInUp 0.6s ease-out ${0.05 * index + 1}s both`
                     }}
                   >
                     <td className="border-b border-cyan-400/30 p-2 md:p-3 text-center bg-black/20">
-                      <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center font-mono font-bold shadow-lg shadow-purple-500/50 text-xs md:text-sm mx-auto transform transition-all duration-300 hover:scale-110 hover:shadow-purple-500/70">
+                      <div className={`w-6 h-6 md:w-8 md:h-8 ${
+                        round.isAdvanced 
+                          ? 'bg-gradient-to-br from-purple-500 to-pink-500' 
+                          : 'bg-gradient-to-br from-cyan-500 to-blue-500'
+                      } text-white rounded-full flex items-center justify-center font-mono font-bold shadow-lg text-xs md:text-sm mx-auto transform transition-all duration-300 hover:scale-110`}>
                         {round.round}
                       </div>
+                      {round.isAdvanced && (
+                        <div className="text-xs text-purple-400 font-mono mt-1">ADV</div>
+                      )}
                     </td>
                     <td className="border-b border-cyan-400/30 p-1 md:p-3 bg-black/20">
                       <CyberInput
                         value={round.userVs}
-                        onChange={(e) => handleRoundChange(index, 'userVs', e.target.value)}
-                        placeholder={getPlaceholder(index, 'userVs')}
+                        onChange={(e) => !round.isAdvanced && handleRoundChange(index, 'userVs', e.target.value)}
+                        placeholder={round.isAdvanced ? "AUTO-PREDICTED" : getPlaceholder(index, 'userVs')}
                         isAuto={isAuto(round.round, 'userVs')}
-                        className="text-xs md:text-sm py-1 md:py-2 px-2 md:px-3"
+                        className={`text-xs md:text-sm py-1 md:py-2 px-2 md:px-3 ${
+                          round.isAdvanced ? 'border-purple-400 bg-purple-500/10' : ''
+                        }`}
                       />
                     </td>
                     <td className="border-b border-cyan-400/30 p-1 md:p-3 bg-black/20">
                       <CyberInput
                         value={round.p8Vs}
-                        onChange={(e) => handleRoundChange(index, 'p8Vs', e.target.value)}
-                        placeholder={getPlaceholder(index, 'p8Vs')}
-                        isAuto={isAuto(round.round, 'p8Vs')}
-                        className="text-xs md:text-sm py-1 md:py-2 px-2 md:px-3"
+                        onChange={(e) => !round.isAdvanced && handleRoundChange(index, 'p8Vs', e.target.value)}
+                        placeholder={round.isAdvanced ? "N/A" : getPlaceholder(index, 'p8Vs')}
+                        isAuto={round.isAdvanced ? true : isAuto(round.round, 'p8Vs')}
+                        className={`text-xs md:text-sm py-1 md:py-2 px-2 md:px-3 ${
+                          round.isAdvanced ? 'border-gray-600 bg-gray-800/50 opacity-50' : ''
+                        }`}
+                        disabled={round.isAdvanced}
                       />
                     </td>
+                    {showAdvanced && (
+                      <td className="border-b border-cyan-400/30 p-1 md:p-3 bg-black/20 text-center">
+                        {round.pattern ? (
+                          <span className="text-xs font-mono text-purple-300 bg-purple-500/20 px-2 py-1 rounded">
+                            {round.pattern.toUpperCase()}
+                          </span>
+                        ) : round.isAdvanced ? (
+                          <span className="text-xs font-mono text-red-300 bg-red-500/20 px-2 py-1 rounded">
+                            UNKNOWN
+                          </span>
+                        ) : (
+                          <span className="text-xs font-mono text-gray-500">-</span>
+                        )}
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          {/* Pattern Info */}
+          {/* Advanced Mode Info */}
+          {showAdvanced && selectedScenario && (
+            <CyberAlert type="info" title="INFORMASI SKENARIO ADVANCED:" delay={1.1}>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <h6 className="font-bold mb-2">
+                    <i className="fas fa-chart-bar mr-2"></i>
+                    SKENARIO: {advancedScenarios[selectedScenario].name}
+                  </h6>
+                  <p className="text-sm">
+                    Prediksi untuk Round 8+ berdasarkan pola yang telah dianalisis dari data historis permainan.
+                  </p>
+                </div>
+                <div>
+                  <h6 className="font-bold mb-2">
+                    <i className="fas fa-exclamation-circle mr-2"></i>
+                    CATATAN PENTING:
+                  </h6>
+                  <ul className="text-sm space-y-1">
+                    <li>• Pattern "UNKNOWN" membutuhkan data tambahan</li>
+                    <li>• Skenario "Mati 1" mempengaruhi prediksi Round 12+</li>
+                    <li>• Akurasi bergantung pada kelengkapan data Round 1-7</li>
+                  </ul>
+                </div>
+              </div>
+            </CyberAlert>
+          )}
+
+          {/* Pattern Detection */}
           <CyberAlert type="success" title="DETEKSI POLA SISTEM:" delay={1.2}>
-            <p>
-              <i className="fas fa-chart-line mr-2"></i>
-              Algoritma mendeteksi <strong>BAHWA</strong>. 
-              Ruii adalah dewa yang mengendalikan sistem ini.
-            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <p>
+                  <i className="fas fa-chart-line mr-2"></i>
+                  Algoritma mendeteksi <strong>POLA BERULANG</strong> dalam sistem permainan McGogo.
+                </p>
+                <p className="mt-2">
+                  Mode Advanced menggunakan <strong>6 SKENARIO</strong> prediksi berdasarkan lawan Round 8.
+                </p>
+              </div>
+              <div>
+                <p>
+                  <i className="fas fa-brain mr-2"></i>
+                  Sistem dikembangkan oleh <strong>RUII DEWA MC</strong> dengan analisis mendalam terhadap pattern matching.
+                </p>
+              </div>
+            </div>
           </CyberAlert>
 
           {/* Validity Warning */}
           <CyberAlert type="warning" title="PERINGATAN SISTEM:" delay={1.4}>
-            <p>
-              <i className="fas fa-clock mr-2"></i>
-              Sistem prediksi hanya valid untuk <strong>ROUND 1-7</strong>. 
-              Round 8+ membutuhkan kalibrasi ulang karena perubahan algoritma game.
-            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <p>
+                  <i className="fas fa-clock mr-2"></i>
+                  Sistem prediksi basic valid untuk <strong>ROUND 1-7</strong>. 
+                  Mode Advanced memperluas prediksi hingga <strong>ROUND 8+</strong>.
+                </p>
+              </div>
+              <div>
+                <p>
+                  <i className="fas fa-shield-alt mr-2"></i>
+                  Akurasi prediksi Advanced bergantung pada:
+                </p>
+                <ul className="text-sm mt-2 space-y-1">
+                  <li>• Kelengkapan data Round 1-7</li>
+                  <li>• Pemilihan skenario yang tepat</li>
+                  <li>• Kondisi "Mati 1" atau faktor eksternal</li>
+                </ul>
+              </div>
+            </div>
           </CyberAlert>
 
           {/* Footer dengan animasi masuk terakhir */}
@@ -514,7 +965,11 @@ const PredictMusuhMcgogo = () => {
               DEVELOPED WITH PASSION FOR MCGOGO COMMUNITY
             </div>
             <div className="mt-2 text-sm opacity-80 transition-all duration-300 hover:opacity-100">
-              © 2025 RUII DEWA MC SYSTEMS - ALL RIGHTS RESERVED
+              © 2025 RUII DEWA MC SYSTEMS - VERSION 3.0 ADVANCED - ALL RIGHTS RESERVED
+            </div>
+            <div className="mt-2 text-xs opacity-60">
+              <i className="fas fa-rocket mr-1"></i>
+              FEATURING ADVANCED ROUND 8+ PREDICTION ALGORITHMS
             </div>
           </footer>
         </div>
