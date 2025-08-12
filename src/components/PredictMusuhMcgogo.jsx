@@ -398,8 +398,8 @@ const PredictMusuhMcgogo = () => {
         { round: 8, pattern: 'r5' },
         { round: 9, pattern: 'r4' },
         { round: 10, pattern: 'r3' },
-        { round: 11, pattern: null }, // Unknown
-        { round: 12, pattern: null }  // Unknown
+        { round: 11, pattern: 'r9' },
+        { round: 12, pattern: 'r11' }  
       ]
     },
     'round5_s2': {
