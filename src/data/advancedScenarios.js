@@ -39,7 +39,7 @@ export const advancedScenarios = {
       { round: 8, pattern: 'r5' },
       { round: 9, pattern: 'r4' },
       { round: 10, pattern: 'r3' },
-      { round: 11, pattern: 'r9' },
+      { round: 11, pattern: 'r4' },
       { round: 12, pattern: 'r7' }  
     ]
   },
@@ -50,8 +50,8 @@ export const advancedScenarios = {
       { round: 9, pattern: 'r2' },
       { round: 10, pattern: 'r3' },
       { round: 11, pattern: 'r7' },
-      { round: 12, pattern: null },
-      { round: 13, pattern: null }
+      { round: 12, pattern: 'r1' },
+      { round: 13, pattern: 'r6' }
     ]
   },
   'round6_s1': {
