@@ -1,15 +1,16 @@
 import React from 'react'
 import PredictMusuhMcgogo from './components/PredictMusuhMcgogo'
+import { AuthProvider } from './components/AuthContext'
 import './App.css'
-import EnhancedBackground from './components/EnhancedBackground';
-import { computeBasicPredictions } from './utils/predictionLogic';
-import { advancedScenarios } from './data/advancedScenarios';
 
 function App() {
   return (
-    <div className="App">
-      <PredictMusuhMcgogo />
-    </div>
+    <AuthProvider>
+      <div className="App">
+        {/* Langsung render PredictMusuhMcgogo tanpa ProtectedRoute */}
+        <PredictMusuhMcgogo />
+      </div>
+    </AuthProvider>
   )
 }
 
