@@ -40,7 +40,9 @@ export const advancedScenarios = {
       { round: 9, pattern: 'r4' },
       { round: 10, pattern: 'r3' },
       { round: 11, pattern: 'r4' },
-      { round: 12, pattern: 'r7' }  
+      { round: 12, pattern: 'r7' },
+      { round: 13, pattern: 'r2' },
+      { round: 14, pattern: 'r1' } 
     ]
   },
   'round5_s2': {
@@ -62,17 +64,6 @@ export const advancedScenarios = {
       { round: 10, pattern: 'r5' },
       { round: 11, pattern: 'r4' },
       { round: 12, pattern: 'r7' },
-      { round: 13, pattern: 'r1' }
-    ]
-  },
-  'round6_s2': {
-    name: 'Lawan Round 6 (Skenario 2 - Mati 1)',
-    rounds: [
-      { round: 8, pattern: 'r6' },
-      { round: 9, pattern: 'r2' },
-      { round: 10, pattern: 'r5' },
-      { round: 11, pattern: 'r4' },
-      { round: 12, pattern: 'r5' }, // Mati 1 effect
       { round: 13, pattern: 'r1' },
       { round: 14, pattern: 'r3' }
     ]
